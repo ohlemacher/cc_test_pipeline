@@ -8,7 +8,7 @@ jobs:
     - aggregate:
       - get: cc-test-app-repo
         trigger: true
-      - get: cc-test-app-module-repo
+      - get: cc-test-module-repo
         trigger: true
     - aggregate:
       - task: run-unit-tests
@@ -19,8 +19,9 @@ jobs:
             source: {repository: python}
           inputs:
             - name: cc-test-app-repo
+            - name: cc-test-module-repo
           run:
-            path: cc-test-app-repo/test_app.sh
+            path: ./cc-test-app-repo/test_app.sh
 
 resources:
 - name: cc-test-app-repo
@@ -28,11 +29,9 @@ resources:
   source:
     uri: https://github.com/ohlemacher/cc_test_app.git
     branch: master
-    # <<: *ghe
 
 - name: cc-test-module-repo
   type: git
   source:
-    uri: git@github.com:ohlemacher/cc_test_module.git
+    uri: https://github.com/ohlemacher/cc_test_module.git
     branch: master
-    # <<: *ghe
