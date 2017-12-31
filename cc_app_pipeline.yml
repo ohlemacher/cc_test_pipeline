@@ -1,14 +1,14 @@
 ---
 
 jobs:
-- name: test-cc-test-app 
+- name: test-cc-test-app
   public: true
   plan:
   - do:
     - aggregate:
       - get: cc-test-app-repo
-        trigger: true 
-			- get: cc-test-app-module-repo
+        trigger: true
+      - get: cc-test-app-module-repo
         trigger: true
     - aggregate:
       - task: run-unit-tests
