@@ -1,6 +1,24 @@
 ---
 
 jobs:
+- name: test-cc-test-module
+  public: true
+  plan:
+  - do:
+    - aggregate:
+      - get: cc-test-module-repo
+        trigger: true
+    - aggregate:
+      - task: run-unit-tests
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source: {repository: python}
+          inputs:
+            - name: cc-test-module-repo
+          run:
+            path: ./cc-test-module-repo/test_module.sh
 - name: test-cc-test-app
   public: true
   plan:
